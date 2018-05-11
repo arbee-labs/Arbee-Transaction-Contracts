@@ -193,7 +193,7 @@ contract ArbeeDisputableSingle is Ownable {
     
     function createByPayerERC20(address _tokenAddress, uint _units, string _description, string _txName, address _to, address _arbitrator, uint _arbitratorFee) fulfillableTx(_tokenAddress, _units) payable public returns (bool success) {
         require(_arbitratorFee < _units);
-        // tricky part where we need to deduct balance and what not depending on contractaddress;
+
         TxStruct memory newPayment = TxStruct({
             payee: _to,
             payer: msg.sender,
