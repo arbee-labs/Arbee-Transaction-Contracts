@@ -1,4 +1,5 @@
 pragma solidity ^0.4.23;
+pragma experimental ABIEncoderV2;
 
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
@@ -414,6 +415,26 @@ contract ArbeeDisputableSingle is Ownable {
     
     function disputePayout(uint _id, address _addr) public view returns (uint256){
         return disputes[_id].payoutAmts[_addr];
+    }
+
+    function getTransactionsStatus(uint[] txIds) public view returns (TxStates[]) {
+        TxStates[] memory tranasactionStates  = new TxStates[](txIds.length);
+        for (uint i=0; i<txIds.length; i++) {
+            uint txId = txIds[i];
+            TxStruct memory transaction = transactions[txId];
+            tranasactionStates[i] = transaction.currState;
+        }
+        return tranasactionStates;
+    }
+    
+    function getTransactions(uint[] txIds) public view returns (TxStruct[]) {
+        TxStruct[] memory transactionList  = new TxStruct[](txIds.length);
+        for (uint i=0; i<txIds.length; i++) {
+            uint txId = txIds[i];
+            TxStruct memory transaction = transactions[txId];
+            transactionList[i] = transaction;
+        }
+        return transactionList;
     }
 
 
