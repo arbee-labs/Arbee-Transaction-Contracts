@@ -91,7 +91,7 @@ contract ArbeeDisputableSingle is Ownable {
         uint _id,
         address indexed _payee,
         address indexed _payer,
-        address indexed _arbitrator,
+        string _txName,
         address _tokenAddress,
         uint256 _units
     );
@@ -400,7 +400,7 @@ contract ArbeeDisputableSingle is Ownable {
         // if (_newTransaction.arbitrator != 0x0) {
         //     userTransactions[_newTransaction.arbitrator].push(transactionCounter);
         // }
-        emit LogCreated(transactionCounter, _newTransaction.payee, _newTransaction.payer, _newTransaction.arbitrator, _newTransaction.assetAddr, _newTransaction.units);
+        emit LogCreated(transactionCounter, _newTransaction.payee, _newTransaction.payer, _newTransaction.txName, _newTransaction.assetAddr, _newTransaction.units);
         transactionCounter ++;
     }
     
